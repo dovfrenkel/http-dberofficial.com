@@ -1,484 +1,696 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>D_BER | Book Your Next DJ</title>
-  <style>
-    /* Reset */
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D Ber | DJ & Producer</title>
 
-    /* Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;600&display=swap');
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #050308;
-      color: #eee;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    /* Background Neon DJ Name Pattern */
-    body::before {
-      content: 'D_BER D_BER D_BER D_BER D_BER D_BER D_BER D_BER D_BER D_BER D_BER ';
-      position: fixed;
-      top: 20%;
-      left: -30%;
-      width: 200vw;
-      height: 200vh;
-      font-family: 'Anton', sans-serif;
-      font-weight: 900;
-      font-size: 9vw;
-      letter-spacing: 0.25em;
-      color: #0ff;
-      opacity: 0.05;
-      text-transform: uppercase;
-      transform: rotate(-20deg);
-      user-select: none;
-      pointer-events: none;
-      z-index: 0;
-      animation: moveText 90s linear infinite;
-      filter: drop-shadow(0 0 8px #0ff);
-      white-space: nowrap;
-    }
-    @keyframes moveText {
-      0% {
-        transform: translateX(0) rotate(-20deg);
-      }
-      100% {
-        transform: translateX(-50%) rotate(-20deg);
-      }
-    }
+    <style>
+        /* CSS STYLES - Everything to make the site look good */
 
-    /* Container for page content */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem 3rem 1.5rem;
-      position: relative;
-      z-index: 10;
-    }
+        /* ------------------- */
+        /* --- Global Styles & Variables --- */
+        /* ------------------- */
+        :root {
+            /* --- CHANGE YOUR COLORS HERE --- */
+            --color-background: #111111; /* Very dark grey */
+            --color-surface: #1d1d1d;    /* Slightly lighter grey for panels */
+            --color-text: #e0e0e0;       /* Light grey for text */
+            --color-text-dark: #888888;  /* Dimmer text for subheadings */
+            --color-accent: #00BFFF;     /* Electric/Deep Sky Blue */
+            /* --- END OF COLORS --- */
+            
+            --font-main: 'Poppins', sans-serif;
+        }
 
-    /* Header */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: rgba(10,10,15,0.95);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 3rem;
-      box-shadow: 0 0 30px #0ff9;
-      z-index: 15;
-      backdrop-filter: blur(8px);
-    }
-    .logo {
-      font-family: 'Anton', sans-serif;
-      font-size: 2.7rem;
-      color: #00fff7;
-      text-shadow:
-        0 0 8px #00fff7,
-        0 0 20px #00fff7;
-      letter-spacing: 0.3em;
-      user-select: none;
-    }
-    nav a {
-      color: #eee;
-      text-transform: uppercase;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-left: 2.4rem;
-      text-decoration: none;
-      letter-spacing: 0.15em;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: #00fff7;
-      transition: width 0.3s ease;
-    }
-    nav a:hover,
-    nav a:focus {
-      color: #00fff7;
-    }
-    nav a:hover::after,
-    nav a:focus::after {
-      width: 100%;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Hero Section */
-    .hero {
-      margin-top: 75px;
-      position: relative;
-      height: 80vh;
-      background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-      border-radius: 14px;
-      box-shadow:
-        0 0 30px #00fff7aa,
-        inset 0 0 100px #00fff7bb;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      user-select: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,255,247,0.7), transparent 70%);
-      mix-blend-mode: screen;
-      pointer-events: none;
-      animation: pulseGlow 3s ease-in-out infinite;
-      border-radius: 14px;
-      z-index: 1;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.7; }
-    }
-    .hero-content {
-      position: relative;
-      z-index: 5;
-      color: #00fff7;
-      max-width: 700px;
-      padding: 0 1rem;
-    }
-    .hero-content h1 {
-      font-family: 'Anton', sans-serif;
-      font-size: 6.5rem;
-      text-shadow:
-        0 0 12px #00fff7,
-        0 0 30px #00fff7,
-        0 0 45px #00fff7;
-      letter-spacing: 0.25em;
-      line-height: 1;
-      user-select: none;
-      margin-bottom: 0.6rem;
-      animation: glitch 3s infinite ease-in-out;
-    }
-    .hero-content p {
-      font-weight: 600;
-      font-size: 1.4rem;
-      letter-spacing: 0.05em;
-      text-shadow: 0 0 8px #00fff7aa;
-      margin-bottom: 2rem;
-    }
-    .btn-book {
-      padding: 1rem 3rem;
-      background: #00fff7;
-      border-radius: 40px;
-      border: none;
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: #050308;
-      cursor: pointer;
-      box-shadow:
-        0 0 15px #00fff7,
-        0 0 30px #00fff7;
-      transition: all 0.3s ease;
-      user-select: none;
-      letter-spacing: 0.2em;
-    }
-    .btn-book:hover {
-      background: transparent;
-      color: #00fff7;
-      border: 2px solid #00fff7;
-      box-shadow:
-        0 0 40px #00fff7,
-        0 0 70px #00fff7;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* Glitch animation for hero text */
-    @keyframes glitch {
-      0% {
-        text-shadow:
-          2px 0 #00fff7,
-          -2px 0 #ff00ff;
-      }
-      50% {
-        text-shadow:
-          4px 0 #00fff7,
-          -4px 0 #ff00ff;
-      }
-      100% {
-        text-shadow:
-          2px 0 #00fff7,
-          -2px 0 #ff00ff;
-      }
-    }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
 
-    /* Section Titles */
-    h2 {
-      font-family: 'Anton', sans-serif;
-      font-size: 3rem;
-      text-align: center;
-      color: #00fff7;
-      text-shadow:
-        0 0 12px #00fff7;
-      margin-bottom: 2rem;
-      user-select: none;
-      letter-spacing: 0.15em;
-    }
+        h1, h2, h3 {
+            line-height: 1.2;
+            font-weight: 600;
+        }
 
-    /* About Section */
-    #about {
-      max-width: 700px;
-      margin: 0 auto 5rem;
-      font-weight: 400;
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: #ccc;
-      user-select: text;
-      padding: 0 1rem;
-    }
-    #about strong {
-      color: #00fff7;
-    }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--color-text);
+            text-transform: uppercase;
+        }
 
-    /* Music Section */
-    #music {
-      max-width: 700px;
-      margin: 0 auto 5rem;
-      text-align: center;
-    }
-    .music-links {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 1.8rem;
-      justify-content: center;
-    }
-    .music-links a {
-      color: #00fff7;
-      background: #0c0c0c;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      padding: 0.9rem 2.4rem;
-      text-decoration: none;
-      box-shadow: 0 0 15px #00fff7aa;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      user-select: none;
-      letter-spacing: 0.1em;
-    }
-    .music-links a:hover {
-      background: #00fff7;
-      color: #0a0a0a;
-      box-shadow: 0 0 35px #00fff7ff;
-    }
-    /* Icon style */
-    .music-links svg {
-      width: 24px;
-      height: 24px;
-      fill: currentColor;
-      user-select: none;
-    }
+        h2::before {
+            content: "// ";
+            color: var(--color-accent);
+        }
 
-    /* Gallery Section */
-    #gallery {
-      max-width: 960px;
-      margin: 0 auto 6rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      user-select: none;
-    }
-    #gallery img {
-      border-radius: 16px;
-      width: 100%;
-      object-fit: cover;
-      box-shadow:
-        0 0 15px #00fff7aa,
-        0 0 30px #00fff7bb inset;
-      filter: brightness(0.9);
-      transition: filter 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-    }
-    #gallery img:hover {
-      filter: brightness(1);
-      transform: scale(1.05);
-      box-shadow:
-        0 0 35px #00fff7ff,
-        0 0 50px #ff00ffbb inset;
-    }
+        section {
+            padding: 100px 5%;
+        }
 
-    /* Booking Section */
-    #booking {
-      max-width: 600px;
-      margin: 0 auto 6rem;
-      padding: 0 1rem;
-    }
-    #booking p {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #ccc;
-      user-select: text;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.4rem;
-    }
-    label {
-      font-weight: 600;
-      color: #00fff7;
-      letter-spacing: 0.05em;
-      user-select: none;
-    }
-    input, textarea {
-      background: #0a0a0a;
-      border: 2px solid #004444;
-      border-radius: 14px;
-      padding: 1rem 1.3rem;
-      color: #eee;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-      font-family: 'Montserrat', sans-serif;
-      resize: none;
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #00fff7;
-      box-shadow: 0 0 20px #00fff7aa;
-      background: #001f1f;
-    }
-    input::placeholder, textarea::placeholder {
-      color: #555;
-    }
-    button[type="submit"] {
-      background: linear-gradient(90deg, #00fff7, #ff00ff);
-      border: none;
-      border-radius: 40px;
-      padding: 1.2rem 2.5rem;
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: #0a0a0a;
-      cursor: pointer;
-      box-shadow:
-        0 0 25px #00fff7,
-        0 0 40px #ff00ff;
-      letter-spacing: 0.15em;
-      transition: background 0.3s ease, color 0.3s ease;
-      user-select: none;
-    }
-    button[type="submit"]:hover {
-      background: transparent;
-      color: #00fff7;
-      border: 2px solid #00fff7;
-      box-shadow:
-        0 0 45px #00fff7,
-        0 0 60px #ff00ff;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* ------------------- */
+        /* --- Header & Navigation --- */
+        /* ------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s ease;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 700;
+        }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1rem 1rem 3rem 1rem;
-      font-size: 0.9rem;
-      color: #555;
-      user-select: none;
-      letter-spacing: 0.1em;
-    }
-    footer a {
-      color: #00fff7;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    footer a:hover {
-      color: #ff00ff;
-      text-shadow: 0 0 10px #ff00ff;
-    }
+        .logo span {
+            color: var(--color-accent);
+        }
 
-    /* Smooth scroll for anchor links */
-    html {
-      scroll-behavior: smooth;
-    }
+        .nav-links a {
+            font-size: 1rem;
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 35px;
+            transition: color 0.3s ease;
+        }
 
-    /* Responsive */
-    @media (max-width: 720px) {
-      .hero-content h1 {
-        font-size: 4rem;
-        letter-spacing: 0.15em;
-      }
-      nav a {
-        margin-left: 1.2rem;
-        font-size: 0.9rem;
-      }
-      #gallery {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-      #booking {
-        max-width: 90vw;
-      }
-    }
-    @media (max-width: 420px) {
-      #gallery {
-        grid-template-columns: 1fr;
-      }
-      nav {
-        display: none; /* simplify mobile nav for now */
-      }
-      header {
-        justify-content: center;
-      }
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;600&display=swap" rel="stylesheet" />
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+
+        #menu-icon {
+            font-size: 2rem;
+            color: var(--color-text);
+            display: none; /* Hidden on desktop */
+        }
+        
+        /* ------------------- */
+        /* --- Hero Section --- */
+        /* ------------------- */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+        }
+
+        #bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: -1;
+        }
+        
+        .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: var(--color-text-dark);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: var(--color-accent);
+            color: var(--color-background);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--color-accent);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--color-accent);
+        }
+
+        /* ------------------- */
+        /* --- About Section --- */
+        /* ------------------- */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-image img {
+            max-width: 350px;
+            border-radius: 10px;
+            border: 3px solid var(--color-surface);
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ------------------- */
+        /* --- Music Section --- */
+        /* ------------------- */
+        #music {
+            background-color: var(--color-surface);
+        }
+        
+        .music-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .music-grid .featured-mix {
+            grid-column: 1 / -1; /* Span full width */
+        }
+        
+        .music-grid iframe {
+            width: 100%;
+            border: none;
+            height: 166px; /* Standard SoundCloud embed height */
+        }
+
+        .featured-mix iframe {
+            height: 300px; /* Taller embed for the main mix */
+        }
+        
+        /* ------------------- */
+        /* --- Gigs Section --- */
+        /* ------------------- */
+        .gigs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gig-list {
+            list-style: none;
+        }
+
+        .gig-list h3 {
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-surface);
+        }
+
+        .gig-list li {
+            background-color: var(--color-surface);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--color-accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gig-list span {
+            display: block;
+        }
+
+        .gig-date {
+            font-weight: 600;
+        }
+
+        .gig-venue {
+            color: var(--color-text-dark);
+        }
+        
+        .gig-list a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ------------------- */
+        /* --- EPK Section --- */
+        /* ------------------- */
+        #epk {
+            background-color: var(--color-surface);
+        }
+        
+        .epk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .epk-item {
+            background-color: var(--color-background);
+            padding: 2rem;
+            border-radius: 5px;
+        }
+
+        .epk-item i {
+            font-size: 3rem;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .epk-item h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .epk-button {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: transparent;
+            color: var(--color-accent);
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--color-accent);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .epk-button:hover {
+            background-color: var(--color-accent);
+            color: var(--color-background);
+        }
+
+        /* ------------------- */
+        /* --- Booking Section --- */
+        /* ------------------- */
+        .booking-content {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .booking-form {
+            flex: 2;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--color-surface);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--color-text);
+            font-family: var(--font-main);
+            font-size: 1rem;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        
+        .contact-info h3 {
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: var(--color-text-dark);
+        }
+        
+        .contact-info a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ------------------- */
+        /* --- Footer Section --- */
+        /* ------------------- */
+        .footer {
+            padding: 2rem 5%;
+            background-color: #000;
+            text-align: center;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            color: var(--color-text-dark);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer p {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--color-text-dark);
+        }
+
+        /* ------------------- */
+        /* --- Responsive Design (for mobile) --- */
+        /* ------------------- */
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block; /* Show hamburger menu */
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 5%;
+                background-color: #111;
+                display: none; /* Hide by default */
+                flex-direction: column;
+            }
+            
+            .nav-links.open {
+                display: flex; /* Show when 'open' class is added */
+            }
+
+            .nav-links a {
+                display: block;
+                margin: 1rem 0;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .about-content, .booking-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            
+            .featured-mix iframe {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">D_BER</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#music">Music</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#booking">Booking</a>
-    </nav>
-  </header>
+    <!-- ================== HEADER ================== -->
+    <header class="header">
+        <a href="#home" class="logo">D BER<span>.</span></a>
+        
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
 
-  <main class="container">
+        <nav class="nav-links">
+            <a href="#home" class="active">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="#music">MUSIC</a>
+            <a href="#gigs">GIGS</a>
+            <a href="#epk">EPK</a>
+            <a href="#book">BOOK</a>
+        </nav>
+    </header>
 
-    <section class="hero" aria-label="DJ D_BER Hero Banner">
-      <div class="hero-content">
-        <h1>D_BER</h1>
-        <p>The Tech House Powerhouse for Your Next Event</p>
-        <button class="btn-book" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" aria-label="Book D_BER now">Book Now</button>
-      </div>
-    </section>
+    <!-- ================== HERO SECTION ================== -->
+    <section id="home">
+        <!-- REPLACE THIS VIDEO with a link to your own performance video -->
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-dj-mixing-at-a-party-3140-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
 
-    <section id="about" aria-label="About D_BER">
-      <h2>About</h2>
-      <p>D_BER is a top-tier tech house DJ and producer known for setting the dancefloor on fire with electrifying beats and seamless mixes. With years of experience playing at major clubs and festivals, D_BER delivers an unforgettable musical journey that keeps crowds moving until dawn.</p>
-      <p><strong>Looking for a high-energy DJ who commands the booth with style and skill?</strong> You’re in the right place. D_BER’s sound blends infectious grooves, deep basslines, and euphoric drops — perfect for your club, festival, or private event.</p>
-    </section>
+        <div class="hero-content">
+            <h1>D BER</h1>
+            <p>HOUSE | TECH HOUSE | AFRO HOUSE | MELODIC TECHNO</p>
+            <a href="#book" class="cta-button">BOOK D BER</a>
+        </div>
+    </section>
 
-    <section id="music" aria-label="Listen to D_BER Music">
-      <h2>Music & Socials</h2>
-      <div class="music-links">
-        <a href="https://soundcloud.com/dber" target="_blank" rel="noopener" aria-label="SoundCloud profile">
-          <!-- SoundCloud SVG icon -->
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.944 10.718a4.72 4.72 0 0 0-3.747-6.063 5.224 5.224 0 0 0-7.59 5.33 3.308 3.308 0 0 0-1.18 6.302h13.323a3.43 3.43 0 0 0-.807-5.57z"/></svg>
-          SoundCloud
-        </a>
-        <a href="https://open.spotify.com/artist/dber" target="_blank" rel="noopener" aria-label="Spotify profile">
-          <!-- Spotify SVG icon -->
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 1
+    <!-- ================== ABOUT SECTION ================== -->
+    <section id="about" class="container">
+        <h2 class="section-title">About D Ber</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <!-- REPLACE THIS IMAGE with your professional press photo -->
+                <img src="https://images.unsplash.com/photo-1594623930335-92b87f5a8945?q=80&w=1887&auto=format&fit=crop" alt="DJ D Ber">
+            </div>
+            <div class="about-text">
+                <h3>Purveyor of Deep and Driving House & Techno</h3>
+                <p>
+                    D Ber is a fixture in the underground club and festival circuit, known for his ability to blend the rhythmic pulse of Afro House with the driving force of Tech House and the emotive landscapes of Melodic Techno.
+                </p>
+                <p>
+                    With notable performances at iconic venues and festivals, his sets are a journey—crafted not just to make people dance, but to create a shared, high-energy experience. D Ber is dedicated to the art of the mix, delivering a sound that is both sophisticated and relentlessly infectious.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== MUSIC SECTION ================== -->
+    <section id="music">
+        <div class="container">
+            <h2 class="section-title">Latest Mixes & Tracks</h2>
+            <div class="music-grid">
+                <div class="featured-mix">
+                    <!-- REPLACE THIS with your main SoundCloud/Mixcloud embed code -->
+                    <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1149957739&color=%2300bfff&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+                </div>
+                <!-- REPLACE THESE with other mixes or tracks -->
+                <div class="other-mix">
+                     <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1315801330&color=%2300bfff&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+                </div>
+                <div class="other-mix">
+                     <iframe scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1390494055&color=%2300bfff&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== GIGS SECTION ================== -->
+    <section id="gigs" class="container">
+        <h2 class="section-title">Gig Schedule</h2>
+        <div class="gigs-container">
+            <div class="upcoming-gigs">
+                <ul class="gig-list">
+                    <h3>Upcoming</h3>
+                    <!-- ADD/EDIT YOUR GIGS HERE -->
+                    <li>
+                        <div>
+                            <span class="gig-date">AUG 30, 2025</span>
+                            <span class="gig-venue">Warehouse Project - Manchester, UK</span>
+                        </div>
+                        <a href="#" target="_blank">TICKETS</a>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="gig-date">SEP 12, 2025</span>
+                            <span class="gig-venue">ADE Showcase @ Club XYZ - Amsterdam, NL</span>
+                        </div>
+                        <a href="#" target="_blank">INFO</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="past-gigs">
+                <ul class="gig-list">
+                    <h3>Past Highlights</h3>
+                    <!-- ADD/EDIT YOUR PAST GIGS HERE -->
+                    <li><div><span class="gig-venue">fabric (London)</span></div></li>
+                    <li><div><span class="gig-venue">Watergate (Berlin)</span></div></li>
+                    <li><div><span class="gig-venue">Sonus Festival (Croatia)</span></div></li>
+                    <li><div><span class="gig-venue">Space (Miami)</span></div></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== EPK SECTION ================== -->
+    <section id="epk">
+        <div class="container">
+            <h2 class="section-title">Press Kit</h2>
+            <div class="epk-grid">
+                <div class="epk-item">
+                    <i class="fa-solid fa-camera-retro"></i>
+                    <h3>Press Photos</h3>
+                    <p>High-resolution photos for promotional use.</p>
+                    <!-- REPLACE THE '#' with a link to your downloadable photo pack (e.g., a Dropbox or Google Drive link) -->
+                    <a href="#" class="epk-button" download>Download (.zip)</a>
+                </div>
+                <div class="epk-item">
+                    <i class="fa-solid fa-file-alt"></i>
+                    <h3>Official Bio</h3>
+                    <p>Full artist biography for press releases.</p>
+                    <!-- REPLACE THE '#' with a link to your bio PDF file -->
+                    <a href="#" class="epk-button" download>Download (.pdf)</a>
+                </div>
+                <div class="epk-item">
+                    <i class="fa-solid fa-sliders"></i>
+                    <h3>Tech Rider</h3>
+                    <p>Technical requirements for performances.</p>
+                    <!-- REPLACE THE '#' with a link to your tech rider PDF file -->
+                    <a href="#" class="epk-button" download>Download (.pdf)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== BOOKING SECTION ================== -->
+    <section id="book" class="container">
+        <h2 class="section-title">Book D Ber</h2>
+        <div class="booking-content">
+            <form action="#" class="booking-form"> <!-- You can connect this to a service like Formspree -->
+                <div class="input-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="event" placeholder="Venue / Festival Name" required>
+                </div>
+                 <div class="input-group">
+                    <input type="date" name="date" placeholder="Date of Event" required>
+                </div>
+                <div class="input-group">
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Submit Inquiry</button>
+            </form>
+            <div class="contact-info">
+                <h3>Agent & Management</h3>
+                <p>For all club and festival booking inquiries, please use the form or contact my agent directly.</p>
+                <!-- REPLACE THIS with your agent's info -->
+                <p>
+                    <strong>Jane Doe | Global Talent Agency</strong><br>
+                    <a href="mailto:jane.doe@globaltalent.com">jane.doe@globaltalent.com</a><br>
+                    <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ================== FOOTER ================== -->
+    <footer class="footer">
+        <div class="social-icons">
+            <!-- REPLACE '#' with links to your social media profiles -->
+            <a href="#" target="_blank"><i class="fa-brands fa-soundcloud"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fa-solid fa-compact-disc"></i></a> <!-- Resident Advisor -->
+        </div>
+        <p>&copy; 2025 D BER. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT for interactivity -->
+    <script>
+        // --- Mobile Menu Toggle ---
+        let menuIcon = document.querySelector('#menu-icon');
+        let navLinks = document.querySelector('.nav-links');
+
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('fa-xmark'); // Changes icon to an 'X'
+            navLinks.classList.toggle('open');
+        };
+
+        // --- Active Nav Link on Scroll ---
+        let sections = document.querySelectorAll('section');
+        let navItems = document.querySelectorAll('.header .nav-links a');
+
+        window.onscroll = () => {
+            sections.forEach(sec => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+
+                if (top >= offset && top < offset + height) {
+                    navItems.forEach(link => {
+                        link.classList.remove('active');
+                        document.querySelector('.header .nav-links a[href*=' + id + ']').classList.add('active');
+                    });
+                };
+            });
+            
+            // --- Remove mobile menu on link click or scroll ---
+            menuIcon.classList.remove('fa-xmark');
+            navLinks.classList.remove('open');
+        };
+    </script>
+</body>
+</html>```
